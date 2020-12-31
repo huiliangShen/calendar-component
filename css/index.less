@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+    --theme-background-color: rgb(255, 255, 255);
+    --theme-color: rgb(24,144,255);
+    --theme-opacity-lower-color: rgb(230, 247, 255);
+    --font-size-normail: 14px;
+    box-sizing: border-box;
+}
+
+h1,h2,h3 {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background: #eee;
+}
+
+header {
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    font-size: 24px;
+    background-color: var(--theme-background-color);
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05);
+}
+
+main {
+    max-width: 1200px;
+    min-width: 600px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+    background-color: #fff;
+    border: 1px solid #eee;
+
+    .calendar-wrap {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        font-size: var(--font-size-normail);
+        .calendar-header {
+            padding: 12px 0;
+            .calendar-header-content {
+                display: flex;
+                align-items: center;
+                margin: 0 auto;
+                text-align: center;
+                .calendar-header-left, .calendar-header-right {
+                    display: inline-block;
+                    padding: 0 10px;
+                    margin: 0 5px;
+                    height: 35px;
+                    background: #eee;
+                    border-radius: 3px;
+                    border: 1px solid rgb(187, 187, 187);
+                    font-size: 14px;
+                    line-height: 35px;
+                    cursor: pointer;
+                    user-select: none;
+                }
+                .calendar-header-left {
+                    float: left;
+                }
+                .calendar-header-right {
+                    float: right;
+                }
+                h2 {
+                    flex: 1;
+                }
+            }
+        }
+        .calendar-panel {
+            display: block;
+            width: 100%;
+            .calendar-date-body {
+                padding: 12px 0;
+                .calendar-date-content {
+                    width: 100%;
+                    .calendar-date-header {
+                        display: grid;
+                        grid-template-columns: repeat(7, 1fr);
+                        grid-column-gap: 8px;
+                        justify-items: end;
+                        & > .calendar-item {
+                            padding: 0 7px 5px 0;
+                        }
+                    }
+                    .calendar-date-tbody {
+                        display: grid;
+                        grid-template-columns: repeat(7, 1fr);
+                        grid-row-gap: 8px;
+                        grid-column-gap: 8px;
+                        text-align: right;
+                        & > .calendar-item {
+                            position: relative;
+                            transition: all .3s;
+                            display: block;
+                            padding: 4px 8px 0;
+                            min-width: 24px;
+                            width: 100%;
+                            border-top: 2px solid rgb(240,240,240);
+                            cursor: pointer;
+                            &::before {
+                                transition: all 0.3s;
+                                position: absolute;
+                                content: ' ';
+                                width: 4px;
+                                left: 0;
+                                top: 0;
+                                bottom: 0;
+                                transform: scale(0);
+                                background: rgba(0,0,0,0);
+                            }
+                            &:hover {
+                                background: rgba(238, 238, 238, 0.6);
+                            }
+                            &.calendar-item-before-month, &.calendar-item-after-month {
+                                color: rgba(0, 0, 0, 0.25);
+                            }
+                            &.active {
+                                background: var(--theme-opacity-lower-color);
+                                color: var(--theme-color);
+                                &::before {
+                                    transform: scale(1);
+                                    background: var(--theme-color);
+                                }
+                            }
+                            &.now-active {
+                                border-color: var(--theme-color);
+                                color: var(--theme-color);
+                            }
+                            .calendar-item-header {
+                                line-height: 24px;
+                            }
+                            .calendar-item-content {
+                                height: 80px;
+                                overflow-x: hidden;
+                                overflow-y: auto;
+                                text-align: left;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.my-list {
+    padding: 0 5px;
+    list-style: none;
+    .my-list-item {
+        position: relative;
+        text-indent: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 25px;
+        color: rgb(31, 30, 30);
+
+        &::before {
+            position: absolute;
+            left: 0;
+            top: 48%;
+            transform: translateY(-50%);
+            content: ' ';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+        }
+
+        &.blue {
+            &::before {
+                background: blue;
+            }
+        }
+
+        &.yellow {
+            &::before {
+                background: yellow;
+            }
+        }
+        
+        &.red {
+            &::before {
+                background: red;
+            }
+        }
+
+        &.green {
+            &::before {
+                background: green;
+            }
+        }
+    }
+}
